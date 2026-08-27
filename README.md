@@ -65,14 +65,14 @@ $$\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i, \quad \bar{y} = \frac{1}{N} \sum_{i=
 ### 3. Contact Angle Determination
 The angular position $\theta_i$ of each contact relative to the centroid is calculated via four-quadrant arctangent:
 
-$$\theta_i = \operatorname{atan2}(y_i - \bar{y}, x_i - \bar{x}), \quad \theta_i \in (-\pi, \pi]$$
+$$\theta_i = \mathrm{atan2}(y_i - \bar{y}, x_i - \bar{x}), \quad \theta_i \in (-\pi, \pi]$$
 
 Because Windows screen space defines the Y-axis as increasing downwards, clockwise angular displacement corresponds to a positive delta in visual screen space.
 
 ### 4. Wrap-Safe Angular Delta and Circular Slot Matching
 For consecutive frames $t-1$ and $t$, the per-contact angular displacement $\delta\theta_i$ is computed using trigonometric normalization to handle $(-\pi, \pi]$ boundary crossings:
 
-$$\delta\theta_i = \operatorname{atan2}\left(\sin(\theta_{i,t} - \theta_{i,t-1}), \cos(\theta_{i,t} - \theta_{i,t-1})\right)$$
+$$\delta\theta_i = \mathrm{atan2}\left(\sin(\theta_{i,t} - \theta_{i,t-1}), \cos(\theta_{i,t} - \theta_{i,t-1})\right)$$
 
 When hardware drivers do not provide persistent contact IDs across frames, the algorithm applies a circular angular slot matching fallback. Contacts are ordered angularly, and slot-to-slot differences are evaluated. The mean rotational delta is:
 
